@@ -1,4 +1,4 @@
-% Script that demonstates the usage of MinimalDepInj.
+% Script that demonstrates the usage of MinimalDepInj.
 
 % Author: Lasse Osterhagen
 
