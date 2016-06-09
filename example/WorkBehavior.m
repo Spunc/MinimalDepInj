@@ -1,8 +1,11 @@
 classdef (Abstract) WorkBehavior < handle
-    
-    methods (Abstract)
-        work(this);
-    end
+%WORKBEHAVIOR is part of the MinimalDepInj example.
+
+% Author: Lasse Osterhagen
+
+methods (Abstract)
+    work(this);
+end
     
 end
 
