@@ -13,8 +13,10 @@ classdef TestClassA < handle
     
     methods
         function this = TestClassA(config)
-            this.simpleProp1 = config.simpleProp1;
-            this.testClassB = config.testClassB;
+            if nargin == 1
+                this.simpleProp1 = config.simpleProp1;
+                this.testClassB = config.testClassB;
+            end
         end
     end
     
