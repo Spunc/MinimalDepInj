@@ -28,9 +28,11 @@ assert(isstruct(s.param), 'createObjMatrix:InvalidFormat', ...
     'The field param must be a struct');
 param = s.param;
 paramCell = struct2cell(param);
-cellSizes = cellfun(@size, paramCell, 'UniformOutput', false);
-assert(isequal(cellSizes{:}), 'createObjMatrix:InvalidFormat', ...
-    'Sizes of all param matrices must be the same.');
+if ~length(paramCell) == 1
+    cellSizes = cellfun(@size, paramCell, 'UniformOutput', false);
+    assert(isequal(cellSizes{:}), 'createObjMatrix:InvalidFormat', ...
+        'Sizes of all param matrices must be the same.');
+end
 
 % Save global properties
 globals = rmfield(s, {'constructor', 'param'});
