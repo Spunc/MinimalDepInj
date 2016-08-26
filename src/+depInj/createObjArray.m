@@ -9,7 +9,7 @@ function objArray = createObjArray(s)
 %   of the struct are matrices of the same size as the target (output)
 %   matrix, containing the values for the objects.
 %
-%   Examples of a root struct for an objectArray:
+%   Examples of a root struct for an array of objects:
 %   config.method = 'depInj.createObjArray';
 %   config.constructor = 'SomeClassConstructor';
 %   config.param.param1 = [1 2; 3 4];
@@ -36,6 +36,9 @@ assert(all(cellfun(@(x) isequal(length(x), outLen), paramCell)), ...
     'createObjArray:InvalidFormat', ...
     'Sizes of all param arrays must be the same.');
 
+% Save global properties
+globals = rmfield(s, {'constructor', 'param'});
+
 objArray(outLen) = eval(s.constructor);
 fns = fieldnames(param);
 for objIdx = 1:numel(objArray)
@@ -44,5 +47,5 @@ for objIdx = 1:numel(objArray)
         fn = fns{fieldIdx};
         config.(fn) = param.(fn)(objIdx);
     end
-    objArray(objIdx) = depInj.createObjFromTree(config);
+    objArray(objIdx) = depInj.createObjFromTree(config, globals);
 end

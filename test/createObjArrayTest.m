@@ -37,3 +37,14 @@ config.param.simpleProp2 = [21, 22];
 outArray = depInj.createObjFromTree(config);
 assert(isa(outArray, 'TestClassB'));
 assert(length(outArray) == 2);
+
+%% Test 4: Using globals
+config.method = 'depInj.createObjArray';
+config.constructor = 'TestClassB';
+config.param.simpleProp1 = [11, 12];
+gl.simpleProp2 = 'global_prop2';
+outArray = depInj.createObjFromTree(config, gl);
+assert(outArray(1).simpleProp1 == 11);
+assert(outArray(2).simpleProp1 == 12);
+assert(strcmp(outArray(1).simpleProp2, gl.simpleProp2));
+assert(strcmp(outArray(2).simpleProp2, gl.simpleProp2));

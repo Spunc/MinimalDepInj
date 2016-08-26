@@ -47,6 +47,20 @@ methods (Test)
         this.verifyEqual(m('a').simpleProp1, 'prop1');
     end
     
+    function testComplexMapWithGlobals(this)
+        gl.simpleProp1 = 'global_prop1';
+        this.s.method = 'depInj.createMap';
+        objStruct.method = 'TestClassB';
+        objStruct.simpleProp2 = 'prop2';
+        this.s.values = cell(1, 3);
+        this.s.values{1} = objStruct;
+        this.s.values(2:3) = {1, 2};
+        m = depInj.createObjFromTree(this.s, gl);
+        obj = m('a');
+        this.verifyEqual(obj.simpleProp1, gl.simpleProp1);
+        this.verifyEqual(obj.simpleProp2, objStruct.simpleProp2);
+    end
+    
 end
 
 end

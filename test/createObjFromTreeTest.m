@@ -27,7 +27,16 @@ assert(isa(testClassA.testClassB, 'TestClassB'));
 assert(strcmp(testClassA.testClassB.simpleProp1, classBConf.simpleProp1));
 assert(strcmp(testClassA.testClassB.simpleProp2, classBConf.simpleProp2));
 
-%% Test 4: Test global properties
+%% Test 4 Layer 1 with global properties
+% Create class config template with a missing property field
+classBC = rmfield(classBConf, 'simpleProp2');
+% Create a global config template with the missing property field
+gl.simpleProp2 = 'global_simpleProp2';
+testClassB = depInj.createObjFromTree(classBC, gl);
+assert(strcmp(testClassB.simpleProp1, classBC.simpleProp1));
+assert(strcmp(testClassB.simpleProp2, gl.simpleProp2));
+
+%% Test 5: Layer 2 with global properties
 % Create individual class config templates
 classBC.method = 'TestClassB';
 classBC.simpleProp2 = 'B_simpleProp2';
@@ -39,3 +48,12 @@ gl.simpleProp1 = 'global_simpleProp1';
 testClassA = depInj.createObjFromTree(treeC, gl);
 assert(strcmp(testClassA.simpleProp1, gl.simpleProp1));
 assert(strcmp(testClassA.testClassB.simpleProp1, gl.simpleProp1));
+
+%% Test 6: Overwrite global properties
+% Create class config template with missing property field at first layer
+treeC = rmfield(treeConf, 'simpleProp1');
+% Create globel config template
+gl.simpleProp1 = 'global_simpleProp1';
+testClassA = depInj.createObjFromTree(treeC, gl);
+assert(strcmp(testClassA.simpleProp1, gl.simpleProp1));
+assert(strcmp(testClassA.testClassB.simpleProp1, treeC.testClassB.simpleProp1));
