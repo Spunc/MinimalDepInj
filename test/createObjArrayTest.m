@@ -6,7 +6,7 @@
 config.constructor = 'TestClassB';
 config.param.simpleProp1 = {'a1', 'a2', 'a3'};
 config.param.simpleProp2 = [11, 12, 13];
-outArray = depInj.createObjArray(config);
+outArray = depInj.createObjMatrix(config);
 assert(isa(outArray, 'TestClassB'));
 assert(length(outArray) == 3);
 for idx = 1:3
