@@ -35,7 +35,7 @@ A *.json* configuration file might look as follows:
 	"method": "Worker",
 	"workBehavior": {
 		"method": "Singing",
-                "songTitle": "Greensleeves"
+		"songTitle": "Greensleeves"
 	}
 }
 ```
