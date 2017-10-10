@@ -24,7 +24,7 @@ Have a look at *MinimalDepInj/example/exampleScript.m*. The example shows the st
 
 The structure contract of classes, to allow them being constructed by MinimalDepInj, is described in the class *MinimalDepInj/example/Worker.m*.
 
-### Recomandation
+### Recommendation
 
 Use MinimalDepInj together with [JSONlab](http://iso2mesh.sourceforge.net/cgi-bin/index.cgi?jsonlab). You can then create configuration templates for object building as simple text files in the *.json*-format. This allows you to examine configuration templates at a glance or to easily edit files in order to change object properties.
 
